@@ -1,0 +1,10 @@
+# Foto Profil
+
+Letakkan foto profil Anda di folder ini dengan nama `profile.jpg`.
+
+Contoh path: `public/images/profile.jpg`
+
+Rekomendasi:
+- Format: JPG atau PNG
+- Ukuran: 400x400 px (persegi)
+- Background: bebas (akan ditampilkan dalam lingkaran)
