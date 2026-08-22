@@ -11,6 +11,7 @@ class Certification extends Model
         'issuer',
         'year',
         'description',
+        'description_id',
         'file_path',
         'is_featured',
         'sort_order',

@@ -8,8 +8,11 @@ class Project extends Model
 {
     protected $fillable = [
         'title',
+        'title_id',
         'role',
+        'role_id',
         'description',
+        'description_id',
         'technologies',
         'link',
         'sort_order',
@@ -17,5 +20,6 @@ class Project extends Model
 
     protected $casts = [
         'description' => 'array',
+        'description_id' => 'array',
     ];
 }

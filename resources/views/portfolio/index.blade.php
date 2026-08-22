@@ -4,21 +4,41 @@
 <nav class="navbar" id="navbar">
     <div class="container nav-container">
         <a href="#home" class="nav-logo">
-            <span class="logo-bracket">&lt;</span>RAI<span class="logo-bracket">/&gt;</span>
+            <span class="nav-logo-mark">RAI</span>
+            <span class="nav-logo-text">Revalina<span class="nav-logo-dot">.</span></span>
         </a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-            <li><a href="#contact" class="nav-cta">Contact</a></li>
-        </ul>
+        <div class="nav-right">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about"><span data-i18n-en>About</span><span data-i18n-id>Tentang</span></a></li>
+                <li><a href="#experience"><span data-i18n-en>Experience</span><span data-i18n-id>Pengalaman</span></a></li>
+                <li><a href="#skills"><span data-i18n-en>Skills</span><span data-i18n-id>Keahlian</span></a></li>
+                <li><a href="#projects"><span data-i18n-en>Projects</span><span data-i18n-id>Proyek</span></a></li>
+                <li><a href="#certifications"><span data-i18n-en>Certifications</span><span data-i18n-id>Sertifikasi</span></a></li>
+                <li><a href="#contact" class="nav-cta"><span data-i18n-en>Contact</span><span data-i18n-id>Kontak</span></a></li>
+            </ul>
+            <div class="lang-switch" id="langSwitch">
+                <button type="button" class="lang-switch-btn" id="langSwitchBtn" aria-haspopup="listbox" aria-expanded="false">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    <span id="langSwitchLabel">EN</span>
+                    <svg class="lang-switch-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+                <ul class="lang-switch-menu" id="langSwitchMenu" role="listbox">
+                    <li><button type="button" class="lang-option" data-lang-value="en" role="option">English <span class="lang-option-check">✓</span></button></li>
+                    <li><button type="button" class="lang-option" data-lang-value="id" role="option">Bahasa Indonesia <span class="lang-option-check">✓</span></button></li>
+                </ul>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </div>
 </nav>
 
@@ -26,45 +46,34 @@
     <div class="container hero-container">
         <div class="hero-content">
             <div class="hero-badge">
-                <span class="pulse-dot"></span>
-                Available for Opportunities
+                <span class="badge-icon">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>
+                    </svg>
+                </span>
+                <span data-i18n-en>Available for Opportunities</span>
+                <span data-i18n-id>Terbuka untuk Peluang Baru</span>
             </div>
             <h1 class="hero-name">
                 {{ $profile->full_name }}
             </h1>
-            <p class="hero-title">{{ $profile->title }}</p>
-            <p class="hero-summary">{{ Str::limit($profile->bio, 180) }}</p>
+            <p class="hero-title">
+                <span data-i18n-en>{{ $profile->title }}</span>
+                <span data-i18n-id>{{ $profile->title_id ?? $profile->title }}</span>
+            </p>
+            <p class="hero-summary">
+                <span data-i18n-en>Certified Data Scientist (BNSP) and Information Systems student skilled in transforming complex data into actionable insights, scalable system architectures, and automated solutions that drive smarter decision-making.</span>
+                <span data-i18n-id>Data Scientist Bersertifikat (BNSP) dan mahasiswa Sistem Informasi yang terampil mengubah data kompleks menjadi wawasan yang actionable, arsitektur sistem yang scalable, dan solusi otomatis untuk pengambilan keputusan yang lebih cerdas.</span>
+            </p>
             <div class="hero-actions">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="#projects" class="btn btn-outline">View Projects</a>
-            </div>
-            @if($featuredCertification)
-                @if($featuredCertification->file_path)
-                <a href="{{ asset($featuredCertification->file_path) }}" target="_blank" rel="noopener noreferrer" class="bnsp-badge bnsp-badge-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 15l-2 5 2-1 2 1-2-5z"/>
-                        <circle cx="12" cy="8" r="6"/>
-                    </svg>
-                    <span>BNSP Certified Data Scientist</span>
-                    <svg class="bnsp-badge-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <path d="M7 17L17 7M7 7h10v10"/>
-                    </svg>
+                <a href="#contact" class="btn btn-primary">
+                    <span data-i18n-en>Get In Touch</span>
+                    <span data-i18n-id>Hubungi Saya</span>
                 </a>
-                @else
-                <div class="bnsp-badge">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 15l-2 5 2-1 2 1-2-5z"/>
-                        <circle cx="12" cy="8" r="6"/>
-                    </svg>
-                    <span>BNSP Certified Data Scientist</span>
-                </div>
-                @endif
-            @endif
+            </div>
         </div>
         <div class="hero-visual">
             <div class="profile-frame">
-                <div class="profile-ring"></div>
-                <div class="profile-ring profile-ring-2"></div>
                 @if($profile->photo && file_exists(public_path($profile->photo)))
                     <img src="{{ asset($profile->photo) }}" alt="{{ $profile->full_name }}" class="profile-photo">
                 @else
@@ -76,21 +85,21 @@
             <div class="hero-stats">
                 <div class="stat-card">
                     <span class="stat-number">{{ $projects->count() }}+</span>
-                    <span class="stat-label">Projects</span>
+                    <span class="stat-label"><span data-i18n-en>Projects</span><span data-i18n-id>Proyek</span></span>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number">{{ $certifications->count() }}</span>
-                    <span class="stat-label">Certifications</span>
+                    <span class="stat-label"><span data-i18n-en>Certifications</span><span data-i18n-id>Sertifikasi</span></span>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number">{{ $softSkills->count() + $hardSkills->count() }}</span>
-                    <span class="stat-label">Skills</span>
+                    <span class="stat-label"><span data-i18n-en>Skills</span><span data-i18n-id>Keahlian</span></span>
                 </div>
             </div>
         </div>
     </div>
     <div class="scroll-indicator">
-        <span>Scroll</span>
+        <span><span data-i18n-en>Scroll</span><span data-i18n-id>Gulir</span></span>
         <div class="scroll-line"></div>
     </div>
 </section>
@@ -98,64 +107,153 @@
 <section class="section" id="about">
     <div class="container">
         <div class="section-header">
-            <span class="section-tag">01 — About Me</span>
-            <h2 class="section-title">Professional Summary</h2>
+            <span class="section-tag"><span data-i18n-en>01 — About Me</span><span data-i18n-id>01 — Tentang Saya</span></span>
+            <h2 class="section-title"><span data-i18n-en>Professional Summary</span><span data-i18n-id>Ringkasan Profesional</span></h2>
         </div>
-        <div class="about-grid">
-            <div class="glass-card about-card">
-                <p class="about-text">{{ $profile->bio }}</p>
-            </div>
-            <div class="glass-card education-card">
-                <h3 class="card-title">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                        <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
-                    </svg>
-                    Education
-                </h3>
-                <div class="timeline">
-                    @foreach($educations as $education)
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <h4>{{ $education->institution }}</h4>
-                            <p class="timeline-meta">{{ $education->location }} · {{ $education->start_date }} — {{ $education->end_date }}</p>
-                            @if($education->gpa)
-                                <span class="gpa-badge">GPA: {{ $education->gpa }}</span>
-                            @endif
+        <div class="glass-card about-card">
+            @if($profile->about_photo && file_exists(public_path($profile->about_photo)))
+            <div class="about-photo-col">
+                <div class="lanyard-stage" id="lanyardStage">
+                    <div class="lanyard-mount"></div>
+                    <div class="lanyard-rope" id="lanyardRope">
+                        <span class="lanyard-emblem">RAI</span>
+                    </div>
+                    <div class="lanyard-card-wrap" id="lanyardCardWrap">
+                        <div class="lanyard-hook"></div>
+                        <div class="lanyard-card-frame">
+                            <div class="lanyard-card">
+                                <img src="{{ asset($profile->about_photo) }}" alt="{{ $profile->full_name }}" class="about-photo" draggable="false">
+                                <div class="lanyard-card-info">
+                                    <span class="lanyard-card-name">{{ $profile->full_name }}</span>
+                                    <span class="lanyard-card-role">
+                                        <span data-i18n-en>Data Scientist (BNSP) · Information Systems</span>
+                                        <span data-i18n-id>Data Scientist (BNSP) · Sistem Informasi</span>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    @endforeach
                 </div>
+            </div>
+            @endif
+            <div class="about-body">
+                <p class="about-text">
+                    <span data-i18n-en>{{ $profile->bio }}</span>
+                    <span data-i18n-id>{{ $profile->bio_id ?? $profile->bio }}</span>
+                </p>
+
+                <div class="about-education">
+                    <h3 class="card-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                            <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
+                        </svg>
+                        <span data-i18n-en>Education</span>
+                        <span data-i18n-id>Pendidikan</span>
+                    </h3>
+                    <div class="timeline">
+                        @foreach($educations as $education)
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>{{ $education->institution }}</h4>
+                                <p class="timeline-meta">
+                                    {{ $education->location }} · {{ $education->start_date }} —
+                                    @if($education->end_date === 'Present')
+                                        <span data-i18n-en>Present</span><span data-i18n-id>Sekarang</span>
+                                    @else
+                                        {{ $education->end_date }}
+                                    @endif
+                                </p>
+                                @if($education->gpa)
+                                    <span class="gpa-badge">
+                                        <span data-i18n-en>GPA</span><span data-i18n-id>IPK</span>: {{ $education->gpa }}
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                @if(file_exists(public_path('files/revalina-aurellia-indrawan-resume.pdf')))
+                <a href="{{ asset('files/revalina-aurellia-indrawan-resume.pdf') }}" download class="btn btn-sm about-cv-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    <span data-i18n-en>Download CV</span>
+                    <span data-i18n-id>Unduh CV</span>
+                </a>
+                @endif
             </div>
         </div>
     </div>
 </section>
 
-<section class="section section-alt" id="experience">
+<section class="section" id="experience">
     <div class="container">
         <div class="section-header">
-            <span class="section-tag">02 — Work Experience</span>
-            <h2 class="section-title">Professional Journey</h2>
+            <span class="section-tag"><span data-i18n-en>02 — Work Experience</span><span data-i18n-id>02 — Pengalaman Kerja</span></span>
+            <h2 class="section-title"><span data-i18n-en>Professional Journey</span><span data-i18n-id>Perjalanan Profesional</span></h2>
         </div>
         <div class="experience-grid">
             @foreach($workExperiences as $experience)
-            <div class="glass-card experience-card">
-                <div class="experience-header">
-                    <div>
-                        <span class="experience-type {{ $experience->type }}">
-                            {{ $experience->type === 'internship' ? 'Internship' : 'Organizational' }}
-                        </span>
-                        <h3 class="experience-position">{{ $experience->position }}</h3>
-                        <p class="experience-company">{{ $experience->company }}</p>
-                    </div>
-                    <span class="experience-date">{{ $experience->start_date }} — {{ $experience->end_date }}</span>
+            @php $hasExpPhoto = $experience->photo && file_exists(public_path($experience->photo)); @endphp
+            <div class="glass-card experience-card {{ $hasExpPhoto ? 'has-photo' : '' }}">
+                @if($hasExpPhoto)
+                <div class="experience-photo-wrap">
+                    <img src="{{ asset($experience->photo) }}" alt="{{ $experience->company }}" class="experience-photo">
+                    <span class="experience-type experience-type-overlay {{ $experience->type }}">
+                        @if($experience->type === 'internship')
+                            <span data-i18n-en>Internship</span><span data-i18n-id>Magang</span>
+                        @else
+                            <span data-i18n-en>Organizational</span><span data-i18n-id>Organisasi</span>
+                        @endif
+                    </span>
                 </div>
-                <ul class="experience-list">
-                    @foreach($experience->responsibilities as $item)
-                    <li>{{ $item }}</li>
-                    @endforeach
-                </ul>
+                @endif
+                <div class="experience-body">
+                    <div class="experience-header">
+                        <div>
+                            @unless($hasExpPhoto)
+                            <span class="experience-type {{ $experience->type }}">
+                                @if($experience->type === 'internship')
+                                    <span data-i18n-en>Internship</span><span data-i18n-id>Magang</span>
+                                @else
+                                    <span data-i18n-en>Organizational</span><span data-i18n-id>Organisasi</span>
+                                @endif
+                            </span>
+                            @endunless
+                            <h3 class="experience-position">
+                                <span data-i18n-en>{{ $experience->position }}</span>
+                                <span data-i18n-id>{{ $experience->position_id ?? $experience->position }}</span>
+                            </h3>
+                            <p class="experience-company">{{ $experience->company }}</p>
+                        </div>
+                        <span class="experience-date">
+                            @if($experience->start_date === $experience->end_date)
+                                {{ $experience->start_date }}
+                            @else
+                                {{ $experience->start_date }} —
+                                @if($experience->end_date === 'Present')
+                                    <span data-i18n-en>Present</span><span data-i18n-id>Sekarang</span>
+                                @else
+                                    {{ $experience->end_date }}
+                                @endif
+                            @endif
+                        </span>
+                    </div>
+                    <ul class="experience-list">
+                        @foreach($experience->responsibilities as $i => $item)
+                        <li>
+                            <span data-i18n-en>{{ $item }}</span>
+                            <span data-i18n-id>{{ $experience->responsibilities_id[$i] ?? $item }}</span>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
             @endforeach
         </div>
@@ -165,8 +263,8 @@
 <section class="section" id="skills">
     <div class="container">
         <div class="section-header">
-            <span class="section-tag">03 — Skills</span>
-            <h2 class="section-title">Technical & Soft Skills</h2>
+            <span class="section-tag"><span data-i18n-en>03 — Skills</span><span data-i18n-id>03 — Keahlian</span></span>
+            <h2 class="section-title"><span data-i18n-en>Technical & Soft Skills</span><span data-i18n-id>Keahlian Teknis & Non-Teknis</span></h2>
         </div>
         <div class="skills-grid">
             <div class="glass-card skills-card">
@@ -175,11 +273,15 @@
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                         <circle cx="12" cy="7" r="4"/>
                     </svg>
-                    Soft Skills
+                    <span data-i18n-en>Soft Skills</span>
+                    <span data-i18n-id>Keahlian Non-Teknis</span>
                 </h3>
                 <div class="skill-tags">
                     @foreach($softSkills as $skill)
-                    <span class="skill-tag soft">{{ $skill->name }}</span>
+                    <span class="skill-tag soft">
+                        <span data-i18n-en>{{ $skill->name }}</span>
+                        <span data-i18n-id>{{ $skill->name_id ?? $skill->name }}</span>
+                    </span>
                     @endforeach
                 </div>
             </div>
@@ -189,7 +291,8 @@
                         <polyline points="16 18 22 12 16 6"/>
                         <polyline points="8 6 2 12 8 18"/>
                     </svg>
-                    Hard Skills
+                    <span data-i18n-en>Hard Skills</span>
+                    <span data-i18n-id>Keahlian Teknis</span>
                 </h3>
                 @php
                     $groupedHardSkills = $hardSkills->groupBy('group_name');
@@ -214,11 +317,15 @@
                         <line x1="2" y1="12" x2="22" y2="12"/>
                         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                     </svg>
-                    Languages
+                    <span data-i18n-en>Languages</span>
+                    <span data-i18n-id>Bahasa</span>
                 </h3>
                 <div class="skill-tags">
                     @foreach($languages as $language)
-                    <span class="skill-tag language">{{ $language->name }}</span>
+                    <span class="skill-tag language">
+                        <span data-i18n-en>{{ $language->name }}</span>
+                        <span data-i18n-id>{{ $language->name_id ?? $language->name }}</span>
+                    </span>
                     @endforeach
                 </div>
             </div>
@@ -226,23 +333,32 @@
     </div>
 </section>
 
-<section class="section section-alt" id="projects">
+<section class="section" id="projects">
     <div class="container">
         <div class="section-header">
-            <span class="section-tag">04 — Projects</span>
-            <h2 class="section-title">Featured Work</h2>
+            <span class="section-tag"><span data-i18n-en>04 — Projects</span><span data-i18n-id>04 — Proyek</span></span>
+            <h2 class="section-title"><span data-i18n-en>Featured Work</span><span data-i18n-id>Karya Unggulan</span></h2>
         </div>
         <div class="projects-grid">
             @foreach($projects as $index => $project)
             <div class="glass-card project-card" data-aos="fade-up">
                 <div class="project-number">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</div>
-                <h3 class="project-title">{{ $project->title }}</h3>
+                <h3 class="project-title">
+                    <span data-i18n-en>{{ $project->title }}</span>
+                    <span data-i18n-id>{{ $project->title_id ?? $project->title }}</span>
+                </h3>
                 @if($project->role)
-                <p class="project-role">{{ $project->role }}</p>
+                <p class="project-role">
+                    <span data-i18n-en>{{ $project->role }}</span>
+                    <span data-i18n-id>{{ $project->role_id ?? $project->role }}</span>
+                </p>
                 @endif
                 <ul class="project-list">
-                    @foreach(array_slice($project->description, 0, 3) as $item)
-                    <li>{{ $item }}</li>
+                    @foreach(array_slice($project->description, 0, 3) as $i => $item)
+                    <li>
+                        <span data-i18n-en>{{ $item }}</span>
+                        <span data-i18n-id>{{ $project->description_id[$i] ?? $item }}</span>
+                    </li>
                     @endforeach
                 </ul>
                 @if($project->technologies)
@@ -261,8 +377,8 @@
 <section class="section" id="certifications">
     <div class="container">
         <div class="section-header">
-            <span class="section-tag">05 — Certifications</span>
-            <h2 class="section-title">Credentials & Achievements</h2>
+            <span class="section-tag"><span data-i18n-en>05 — Certifications</span><span data-i18n-id>05 — Sertifikasi</span></span>
+            <h2 class="section-title"><span data-i18n-en>Credentials & Achievements</span><span data-i18n-id>Kredensial & Pencapaian</span></h2>
         </div>
         @if($featuredCertification)
         @php $featuredHasFile = $featuredCertification->file_path; @endphp
@@ -281,13 +397,20 @@
                     </svg>
                 </div>
                 <div>
-                    <span class="featured-label">Featured Certification</span>
+                    <span class="featured-label">
+                        <span data-i18n-en>Featured Certification</span>
+                        <span data-i18n-id>Sertifikasi Unggulan</span>
+                    </span>
                     <h3>{{ $featuredCertification->title }}</h3>
                     <p>{{ $featuredCertification->issuer }} · {{ $featuredCertification->year }}</p>
-                    <p class="featured-desc">{{ $featuredCertification->description }}</p>
+                    <p class="featured-desc">
+                        <span data-i18n-en>{{ $featuredCertification->description }}</span>
+                        <span data-i18n-id>{{ $featuredCertification->description_id ?? $featuredCertification->description }}</span>
+                    </p>
                     @if($featuredHasFile)
                     <span class="featured-cert-cta">
-                        View Certificate
+                        <span data-i18n-en>View Certificate</span>
+                        <span data-i18n-id>Lihat Sertifikat</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M7 17L17 7M7 7h10v10"/>
                         </svg>
@@ -310,10 +433,16 @@
                 <h4>{{ $cert->title }}</h4>
                 <p>{{ $cert->issuer }}</p>
                 @if($cert->description)
-                <p class="cert-desc">{{ $cert->description }}</p>
+                <p class="cert-desc">
+                    <span data-i18n-en>{{ $cert->description }}</span>
+                    <span data-i18n-id>{{ $cert->description_id ?? $cert->description }}</span>
+                </p>
                 @endif
                 @if($certHasFile)
-                <span class="cert-card-cta">View Certificate →</span>
+                <span class="cert-card-cta">
+                    <span data-i18n-en>View Certificate →</span>
+                    <span data-i18n-id>Lihat Sertifikat →</span>
+                </span>
                 @endif
             </{{ $certHasFile ? 'a' : 'div' }}>
             @endforeach
@@ -325,32 +454,15 @@
     <div class="container">
         <div class="contact-wrapper glass-card">
             <div class="section-header">
-                <span class="section-tag">06 — Contact</span>
-                <h2 class="section-title">Let's Connect</h2>
-                <p class="contact-subtitle">Interested in collaborating or discussing opportunities? Feel free to reach out.</p>
+                <span class="section-tag"><span data-i18n-en>06 — Contact</span><span data-i18n-id>06 — Kontak</span></span>
+                <h2 class="section-title"><span data-i18n-en>Let's Connect</span><span data-i18n-id>Mari Terhubung</span></h2>
+                <p class="contact-subtitle">
+                    <span data-i18n-en>Interested in collaborating or discussing opportunities? Feel free to reach out.</span>
+                    <span data-i18n-id>Tertarik untuk berkolaborasi atau mendiskusikan peluang? Jangan ragu untuk menghubungi saya.</span>
+                </p>
             </div>
-            @php
-                $waDigits = ltrim(preg_replace('/\D/', '', $profile->phone), '0');
-                $waNumber = '62' . $waDigits;
-            @endphp
-            <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode('Hi Revalina, I saw your portfolio and would like to connect!') }}"
-               target="_blank" rel="noopener noreferrer" class="contact-hero contact-hero-wa">
-                <div class="contact-hero-icon">
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                        <path d="M12.004 2.003c-5.514 0-9.997 4.483-9.997 9.997 0 1.762.464 3.479 1.345 4.988L2 22l5.144-1.324a9.96 9.96 0 0 0 4.86 1.238h.004c5.514 0 9.997-4.483 9.997-9.997 0-2.67-1.04-5.182-2.929-7.071a9.935 9.935 0 0 0-7.072-2.843zm0 18.163h-.003a8.15 8.15 0 0 1-4.152-1.137l-.298-.177-3.053.786.815-2.977-.194-.306a8.156 8.156 0 0 1-1.25-4.356c0-4.509 3.669-8.178 8.178-8.178a8.13 8.13 0 0 1 5.786 2.396 8.13 8.13 0 0 1 2.393 5.788c0 4.508-3.668 8.176-8.222 8.176z"/>
-                    </svg>
-                </div>
-                <div class="contact-hero-text">
-                    <span class="contact-hero-title">Chat on WhatsApp</span>
-                    <span class="contact-hero-sub">Fastest way to reach me — usually replies within a day</span>
-                </div>
-                <svg class="contact-hero-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M13 6l6 6-6 6"/>
-                </svg>
-            </a>
             <div class="contact-grid">
-                <a href="mailto:{{ $profile->email }}" class="contact-item contact-item-email">
+                <a href="mailto:{{ $profile->email }}?subject={{ rawurlencode('Portfolio Inquiry - Let\'s Connect') }}" class="contact-item contact-item-email">
                     <div class="contact-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -358,19 +470,19 @@
                         </svg>
                     </div>
                     <div>
-                        <span class="contact-label">Email</span>
+                        <span class="contact-label"><span data-i18n-en>Email</span><span data-i18n-id>Email</span></span>
                         <span class="contact-value">{{ $profile->email }}</span>
                     </div>
                 </a>
-                <a href="tel:{{ $profile->phone }}" class="contact-item contact-item-phone">
+                <a href="{{ $profile->github ?? 'https://github.com/Revlnrindrawan' }}" target="_blank" rel="noopener noreferrer" class="contact-item contact-item-github">
                     <div class="contact-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.68 1.25 3.34.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/>
                         </svg>
                     </div>
                     <div>
-                        <span class="contact-label">Phone</span>
-                        <span class="contact-value">{{ $profile->phone }}</span>
+                        <span class="contact-label">GitHub</span>
+                        <span class="contact-value">Revlnrindrawan</span>
                     </div>
                 </a>
                 <a href="{{ $profile->linkedin }}" target="_blank" rel="noopener noreferrer" class="contact-item contact-item-linkedin">
@@ -391,7 +503,7 @@
 
 <footer class="footer">
     <div class="container">
-        <p>&copy; {{ date('Y') }} {{ $profile->full_name }}. Built with Laravel.</p>
+        <p>&copy; {{ date('Y') }} {{ $profile->full_name }}.</p>
     </div>
 </footer>
 @endsection

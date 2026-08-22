@@ -17,11 +17,15 @@ class PortfolioSeeder extends Seeder
         Profile::create([
             'full_name' => 'Revalina Aurellia Indrawan',
             'title' => 'Information Systems Student & Certified Data Scientist (BNSP)',
+            'title_id' => 'Mahasiswa Sistem Informasi & Data Scientist Bersertifikat (BNSP)',
             'bio' => 'Information Systems student and certified Data Scientist (BNSP) with hands-on experience in data analysis, system architecture, and process automation. Dedicated to applying data-driven solutions to solve business challenges and enhance operational efficiency. Committed to leveraging analytical skills to streamline workflows and improve organizational performance.',
+            'bio_id' => 'Mahasiswa Sistem Informasi dan Data Scientist bersertifikat (BNSP) dengan pengalaman langsung dalam analisis data, arsitektur sistem, dan otomatisasi proses. Berdedikasi menerapkan solusi berbasis data untuk memecahkan tantangan bisnis dan meningkatkan efisiensi operasional. Berkomitmen memanfaatkan kemampuan analitis untuk menyederhanakan alur kerja dan meningkatkan kinerja organisasi.',
             'email' => 'revalinaurellia@gmail.com',
             'phone' => '088213343786',
             'linkedin' => 'https://www.linkedin.com/in/revalina-aurellia-indrawan',
-            'photo' => 'images/profile.jpg',
+            'github' => 'https://github.com/Revlnrindrawan',
+            'photo' => 'images/profile.png',
+            'about_photo' => 'images/about-photo.jpg',
         ]);
 
         Education::insert([
@@ -31,7 +35,7 @@ class PortfolioSeeder extends Seeder
                 'degree' => 'Information Systems',
                 'start_date' => 'Sep 2022',
                 'end_date' => 'Present',
-                'gpa' => '3.37 / 4.00',
+                'gpa' => '3.38 / 4.00',
                 'sort_order' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -44,15 +48,23 @@ class PortfolioSeeder extends Seeder
             [
                 'company' => 'Otoritas Jasa Keuangan (OJK)',
                 'position' => 'Intern',
+                'position_id' => 'Magang',
                 'location' => 'Indonesia',
                 'start_date' => 'Feb 2026',
-                'end_date' => 'Present',
+                'end_date' => 'Feb 2026',
                 'responsibilities' => json_encode([
                     'Stress Testing & Data Modeling',
                     'Automation of Financial Data Processing',
                     'International Policy Analysis',
                     'Financial Services Sector Surveillance',
                 ]),
+                'responsibilities_id' => json_encode([
+                    'Stress Testing & Pemodelan Data',
+                    'Otomatisasi Pemrosesan Data Keuangan',
+                    'Analisis Kebijakan Internasional',
+                    'Pengawasan Sektor Jasa Keuangan',
+                ]),
+                'photo' => 'images/exp-ojk.jpg',
                 'type' => 'internship',
                 'sort_order' => 1,
                 'created_at' => now(),
@@ -61,6 +73,7 @@ class PortfolioSeeder extends Seeder
             [
                 'company' => 'PT Energi Mega Persada',
                 'position' => 'Intern',
+                'position_id' => 'Magang',
                 'location' => 'Indonesia',
                 'start_date' => 'Jul 2025',
                 'end_date' => 'Sep 2025',
@@ -70,6 +83,13 @@ class PortfolioSeeder extends Seeder
                     'Enabled HR to easily identify certifications that are nearing expiration (within 3 months), already expired, or still valid',
                     'Improved efficiency in monitoring and decision-making processes by providing automated alerts and clear visualization of certification timelines',
                 ]),
+                'responsibilities_id' => json_encode([
+                    'Mengembangkan website internal untuk memantau sertifikasi bagi departemen HR',
+                    'Merancang dan mengimplementasikan sistem yang memungkinkan HR melacak status sertifikasi karyawan secara real-time',
+                    'Memudahkan HR mengidentifikasi sertifikasi yang akan kedaluwarsa (dalam 3 bulan), sudah kedaluwarsa, atau masih berlaku',
+                    'Meningkatkan efisiensi proses pemantauan dan pengambilan keputusan melalui notifikasi otomatis dan visualisasi timeline sertifikasi yang jelas',
+                ]),
+                'photo' => 'images/exp-emp.jpg',
                 'type' => 'internship',
                 'sort_order' => 2,
                 'created_at' => now(),
@@ -78,6 +98,7 @@ class PortfolioSeeder extends Seeder
             [
                 'company' => 'Genesis 2024 — Information Systems Student Association',
                 'position' => 'Guider',
+                'position_id' => 'Pemandu',
                 'location' => 'Telkom University',
                 'start_date' => 'Aug 2024',
                 'end_date' => 'Nov 2024',
@@ -88,6 +109,14 @@ class PortfolioSeeder extends Seeder
                     'Acted as a role model for discipline, responsibility, and leadership',
                     'Delivered soft skill sessions on teamwork, communication, and problem-solving',
                 ]),
+                'responsibilities_id' => json_encode([
+                    'Membimbing dan mendampingi peserta selama program pelatihan kepemimpinan',
+                    'Memberikan motivasi dan dukungan emosional untuk keterlibatan dan perkembangan peserta',
+                    'Memantau perkembangan karakter dan memberikan evaluasi berkala',
+                    'Menjadi panutan dalam hal kedisiplinan, tanggung jawab, dan kepemimpinan',
+                    'Menyampaikan sesi soft skill tentang kerja sama tim, komunikasi, dan pemecahan masalah',
+                ]),
+                'photo' => 'images/exp-guider.jpg',
                 'type' => 'organizational',
                 'sort_order' => 3,
                 'created_at' => now(),
@@ -98,7 +127,9 @@ class PortfolioSeeder extends Seeder
         Project::insert([
             [
                 'title' => 'Data Mining: Prediction and Classification of Heart Disease Risk Factors',
+                'title_id' => 'Data Mining: Prediksi dan Klasifikasi Faktor Risiko Penyakit Jantung',
                 'role' => 'Data Analyst & ML Developer',
+                'role_id' => 'Analis Data & Pengembang ML',
                 'description' => json_encode([
                     'Collected, cleaned, and preprocessed heart disease datasets for machine learning analysis',
                     'Implemented the Random Forest algorithm to predict potential heart disease risk based on clinical and demographic factors',
@@ -106,6 +137,14 @@ class PortfolioSeeder extends Seeder
                     'Evaluated model performance using metrics such as accuracy, precision, recall, and silhouette score',
                     'Conducted data visualization to interpret the results and highlight significant features',
                     'Collaborated with team members to document findings and present insights in a final report and presentation',
+                ]),
+                'description_id' => json_encode([
+                    'Mengumpulkan, membersihkan, dan melakukan preprocessing dataset penyakit jantung untuk analisis machine learning',
+                    'Menerapkan algoritma Random Forest untuk memprediksi potensi risiko penyakit jantung berdasarkan faktor klinis dan demografis',
+                    'Menerapkan K-Means Clustering untuk mengelompokkan individu berdasarkan pola faktor risiko yang serupa',
+                    'Mengevaluasi performa model menggunakan metrik seperti akurasi, presisi, recall, dan silhouette score',
+                    'Melakukan visualisasi data untuk menginterpretasikan hasil dan menyoroti fitur-fitur penting',
+                    'Berkolaborasi dengan anggota tim untuk mendokumentasikan temuan dan mempresentasikan insight dalam laporan akhir',
                 ]),
                 'technologies' => 'Python, Random Forest, K-Means, Data Visualization',
                 'link' => null,
@@ -115,10 +154,16 @@ class PortfolioSeeder extends Seeder
             ],
             [
                 'title' => 'TAMENG — Teknologi Aman Mandiri Untuk Negara',
+                'title_id' => 'TAMENG — Teknologi Aman Mandiri Untuk Negara',
                 'role' => 'Usability Tester',
+                'role_id' => 'Penguji Usability',
                 'description' => json_encode([
                     'Conducted usability testing for TAMENG, an internal disaster response support application developed for RENHAN operations',
                     'Focused on assessing navigation and utility during emergency scenarios to ensure all features were accessible, efficient, and operable under urgent conditions',
+                ]),
+                'description_id' => json_encode([
+                    'Melakukan pengujian usability untuk TAMENG, aplikasi pendukung tanggap bencana internal yang dikembangkan untuk operasional RENHAN',
+                    'Berfokus pada evaluasi navigasi dan kegunaan dalam skenario darurat untuk memastikan semua fitur mudah diakses, efisien, dan dapat dioperasikan dalam kondisi mendesak',
                 ]),
                 'technologies' => 'Usability Testing, UX Research',
                 'link' => null,
@@ -128,12 +173,20 @@ class PortfolioSeeder extends Seeder
             ],
             [
                 'title' => 'RENHAN Business Process Optimization & Humanitarian Operations App',
+                'title_id' => 'Optimalisasi Proses Bisnis RENHAN & Aplikasi Operasi Kemanusiaan',
                 'role' => 'System Analyst & UI/UX Designer',
+                'role_id' => 'Analis Sistem & Desainer UI/UX',
                 'description' => json_encode([
                     'Analyzed system and user needs at RENHAN to facilitate business process improvements',
                     'Architected system design employing UML-based diagrams (Use Case, Component, Deployment)',
                     'Defined core system functionalities and user workflows',
                     'Created iterative low and high-fidelity prototypes',
+                ]),
+                'description_id' => json_encode([
+                    'Menganalisis kebutuhan sistem dan pengguna di RENHAN untuk mendukung perbaikan proses bisnis',
+                    'Merancang arsitektur sistem menggunakan diagram berbasis UML (Use Case, Component, Deployment)',
+                    'Mendefinisikan fungsionalitas inti sistem dan alur kerja pengguna',
+                    'Membuat prototipe low-fidelity dan high-fidelity secara iteratif',
                 ]),
                 'technologies' => 'UML, Figma, Visual Paradigm, System Analysis',
                 'link' => null,
@@ -143,13 +196,22 @@ class PortfolioSeeder extends Seeder
             ],
             [
                 'title' => 'Mathilda Relaxation App',
+                'title_id' => 'Aplikasi Relaksasi Mathilda',
                 'role' => 'UX Designer',
+                'role_id' => 'Desainer UX',
                 'description' => json_encode([
                     'Developed user experience strategy and design for a digital wellness application',
                     'Employed user research methodologies (interviews, observations) to identify key user needs',
                     'Visualized user interactions through journey maps and layouts',
                     'Produced iterative prototypes (low and high-fidelity) using standard design software',
                     'Contributed to a 5-person team using design thinking principles',
+                ]),
+                'description_id' => json_encode([
+                    'Mengembangkan strategi dan desain pengalaman pengguna untuk aplikasi digital wellness',
+                    'Menggunakan metodologi riset pengguna (wawancara, observasi) untuk mengidentifikasi kebutuhan utama pengguna',
+                    'Memvisualisasikan interaksi pengguna melalui journey map dan layout',
+                    'Menghasilkan prototipe iteratif (low dan high-fidelity) menggunakan software desain standar',
+                    'Berkontribusi dalam tim beranggotakan 5 orang menggunakan prinsip design thinking',
                 ]),
                 'technologies' => 'Figma, User Research, Journey Mapping, Prototyping',
                 'link' => null,
@@ -160,15 +222,21 @@ class PortfolioSeeder extends Seeder
         ]);
 
         $softSkills = [
-            'Critical Thinking', 'Problem Solving', 'Leadership',
-            'Time Management', 'Teamwork', 'Public Speaking',
+            'Critical Thinking' => 'Berpikir Kritis',
+            'Problem Solving' => 'Pemecahan Masalah',
+            'Leadership' => 'Kepemimpinan',
+            'Time Management' => 'Manajemen Waktu',
+            'Teamwork' => 'Kerja Tim',
+            'Public Speaking' => 'Berbicara di Depan Umum',
         ];
 
-        foreach ($softSkills as $index => $skill) {
+        $index = 0;
+        foreach ($softSkills as $en => $id) {
             Skill::create([
-                'name' => $skill,
+                'name' => $en,
+                'name_id' => $id,
                 'category' => 'soft',
-                'sort_order' => $index + 1,
+                'sort_order' => ++$index,
             ]);
         }
 
@@ -206,12 +274,17 @@ class PortfolioSeeder extends Seeder
             ]);
         }
 
-        $languages = ['Indonesian', 'English'];
-        foreach ($languages as $index => $language) {
+        $languages = [
+            'Indonesian' => 'Bahasa Indonesia',
+            'English' => 'Bahasa Inggris',
+        ];
+        $index = 0;
+        foreach ($languages as $en => $id) {
             Skill::create([
-                'name' => $language,
+                'name' => $en,
+                'name_id' => $id,
                 'category' => 'language',
-                'sort_order' => $index + 1,
+                'sort_order' => ++$index,
             ]);
         }
 
@@ -220,7 +293,8 @@ class PortfolioSeeder extends Seeder
                 'title' => 'Sertifikasi Kompetensi Data Scientist',
                 'issuer' => 'BNSP — LSP Informatika',
                 'year' => '2025',
-                'description' => 'Certified Associate Data Scientist (CADS) — Kecerdasan Buatan / Ilmuwan Data Madya. National professional competency certification validating expertise in data analysis, machine learning, and AI.',
+                'description' => 'Certified Associate Data Scientist (CADS) — Kecerdasan Buatan / Ilmuwan Data Madya. Reg. No. TIK.317.04114 2025. National professional competency certification validating expertise in data analysis, machine learning, and AI. Valid 3 years, issued Jakarta, 27 November 2025.',
+                'description_id' => 'Ilmuwan Data Madya Bersertifikat (CADS) — Kecerdasan Buatan. No. Reg. TIK.317.04114 2025. Sertifikasi kompetensi profesi nasional yang memvalidasi keahlian dalam analisis data, machine learning, dan AI. Berlaku 3 tahun, diterbitkan di Jakarta, 27 November 2025.',
                 'file_path' => 'files/sertifikat-bnsp-data-scientist.png',
                 'is_featured' => true,
                 'sort_order' => 1,
@@ -232,6 +306,7 @@ class PortfolioSeeder extends Seeder
                 'issuer' => 'Aguna',
                 'year' => '2024',
                 'description' => 'Fundamental Linux operating system administration and command-line proficiency.',
+                'description_id' => 'Dasar-dasar administrasi sistem operasi Linux dan kemampuan command-line.',
                 'is_featured' => false,
                 'sort_order' => 2,
                 'created_at' => now(),
@@ -242,6 +317,7 @@ class PortfolioSeeder extends Seeder
                 'issuer' => 'Aguna',
                 'year' => '2024',
                 'description' => 'Virtual machine setup, configuration, and management fundamentals.',
+                'description_id' => 'Dasar-dasar instalasi, konfigurasi, dan pengelolaan virtual machine.',
                 'is_featured' => false,
                 'sort_order' => 3,
                 'created_at' => now(),
@@ -252,6 +328,7 @@ class PortfolioSeeder extends Seeder
                 'issuer' => 'Telkom University',
                 'year' => '2024',
                 'description' => 'Score: 480 — English proficiency assessment for academic and professional readiness.',
+                'description_id' => 'Skor: 480 — Tes kemampuan bahasa Inggris untuk kesiapan akademik dan profesional.',
                 'is_featured' => false,
                 'sort_order' => 4,
                 'created_at' => now(),

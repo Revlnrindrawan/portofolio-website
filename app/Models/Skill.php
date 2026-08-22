@@ -8,6 +8,7 @@ class Skill extends Model
 {
     protected $fillable = [
         'name',
+        'name_id',
         'category',
         'group_name',
         'sort_order',
