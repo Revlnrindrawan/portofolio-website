@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.glass-card, .featured-cert, .project-card').forEach(el => {
+    document.querySelectorAll('.glass-card, .featured-cert, .project-tile').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let dx = 0, dy = 0;   // current offset from rest, px
         let vx = 0, vy = 0;   // velocity, px/s
+        let tiltX = 0, tiltY = 0; // 3D hover tilt, degrees
         let dragging = false;
         let rafId = null;
         let lastTime = 0;
@@ -118,9 +119,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const MAX_RADIUS = 130;  // how far the photo can be flung, px — flexible pull
         const OMEGA = 11;        // spring stiffness — snappy
         const ZETA = 0.13;       // underdamped — a few real slingshot bounces before settling
+        const MAX_TILT = 14;     // 3D hover-tilt clamp, degrees
+
+        function setSnappy() {
+            cardWrap.style.transition = 'none';
+        }
+
+        function setSmooth() {
+            cardWrap.style.transition = 'transform 0.25s ease';
+        }
 
         function render() {
-            cardWrap.style.transform = `translate(calc(-50% + ${dx}px), ${dy}px)`;
+            cardWrap.style.transform =
+                `translate(calc(-50% + ${dx}px), ${dy}px) perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
             // The strap is a rigid rod pivoting from the fixed mount: point it
             // straight at the card and stretch it to the true distance so it
             // always visually connects mount -> hook, at any angle.
@@ -158,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 vy = 0;
                 render();
                 rafId = null;
+                setSmooth();
                 return;
             }
             rafId = requestAnimationFrame(springStep);
@@ -165,6 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function startSpring() {
             stopSpring();
+            setSnappy();
             lastTime = 0;
             rafId = requestAnimationFrame(springStep);
         }
@@ -200,7 +213,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cardWrap.addEventListener('pointerdown', (e) => {
             stopSpring();
+            setSnappy();
             dragging = true;
+            tiltX = 0;
+            tiltY = 0;
             cardWrap.classList.add('dragging');
             startPointer = { x: e.clientX, y: e.clientY };
             startOffset = { x: dx, y: dy };
@@ -214,6 +230,25 @@ document.addEventListener('DOMContentLoaded', () => {
         cardWrap.addEventListener('pointermove', onPointerMove);
         cardWrap.addEventListener('pointerup', onPointerUp);
         cardWrap.addEventListener('pointercancel', onPointerUp);
+
+        // Subtle 3D tilt toward the cursor — mouse only, so it never fights
+        // the touch/pointer drag-and-fling above.
+        stage.addEventListener('mousemove', (e) => {
+            if (dragging || rafId) return;
+            const rect = stage.getBoundingClientRect();
+            const relX = (e.clientX - rect.left) / rect.width - 0.5;
+            const relY = (e.clientY - rect.top) / rect.height - 0.5;
+            tiltY = relX * MAX_TILT * 2;
+            tiltX = -relY * MAX_TILT * 2;
+            render();
+        });
+
+        stage.addEventListener('mouseleave', () => {
+            if (dragging || rafId) return;
+            tiltX = 0;
+            tiltY = 0;
+            render();
+        });
 
         render();
 

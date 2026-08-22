@@ -340,34 +340,37 @@
             <h2 class="section-title"><span data-i18n-en>Featured Work</span><span data-i18n-id>Karya Unggulan</span></h2>
         </div>
         <div class="projects-grid">
+            @php $paletteCycle = ['teal-blue', 'blue-purple', 'purple-light', 'light-teal']; @endphp
             @foreach($projects as $index => $project)
-            <div class="glass-card project-card" data-aos="fade-up">
-                <div class="project-number">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</div>
-                <h3 class="project-title">
-                    <span data-i18n-en>{{ $project->title }}</span>
-                    <span data-i18n-id>{{ $project->title_id ?? $project->title }}</span>
-                </h3>
-                @if($project->role)
-                <p class="project-role">
-                    <span data-i18n-en>{{ $project->role }}</span>
-                    <span data-i18n-id>{{ $project->role_id ?? $project->role }}</span>
-                </p>
-                @endif
-                <ul class="project-list">
-                    @foreach(array_slice($project->description, 0, 3) as $i => $item)
-                    <li>
-                        <span data-i18n-en>{{ $item }}</span>
-                        <span data-i18n-id>{{ $project->description_id[$i] ?? $item }}</span>
-                    </li>
-                    @endforeach
-                </ul>
-                @if($project->technologies)
-                <div class="project-tech">
-                    @foreach(explode(', ', $project->technologies) as $tech)
-                    <span>{{ trim($tech) }}</span>
-                    @endforeach
+            <div class="project-tile {{ $index === 0 ? 'project-tile-featured' : '' }} tile-{{ $paletteCycle[$index % 4] }}" data-aos="fade-up">
+                <span class="project-tile-number">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <div class="project-tile-overlay">
+                    <h3 class="project-title">
+                        <span data-i18n-en>{{ $project->title }}</span>
+                        <span data-i18n-id>{{ $project->title_id ?? $project->title }}</span>
+                    </h3>
+                    @if($project->role)
+                    <p class="project-role">
+                        <span data-i18n-en>{{ $project->role }}</span>
+                        <span data-i18n-id>{{ $project->role_id ?? $project->role }}</span>
+                    </p>
+                    @endif
+                    <ul class="project-list">
+                        @foreach(array_slice($project->description, 0, $index === 0 ? 3 : 2) as $i => $item)
+                        <li>
+                            <span data-i18n-en>{{ $item }}</span>
+                            <span data-i18n-id>{{ $project->description_id[$i] ?? $item }}</span>
+                        </li>
+                        @endforeach
+                    </ul>
+                    @if($project->technologies)
+                    <div class="project-tech">
+                        @foreach(explode(', ', $project->technologies) as $tech)
+                        <span>{{ trim($tech) }}</span>
+                        @endforeach
+                    </div>
+                    @endif
                 </div>
-                @endif
             </div>
             @endforeach
         </div>
