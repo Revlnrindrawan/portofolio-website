@@ -161,7 +161,7 @@ class PortfolioSeeder extends Seeder
                     'Berfokus pada evaluasi navigasi dan kegunaan dalam skenario darurat untuk memastikan semua fitur mudah diakses, efisien, dan dapat dioperasikan dalam kondisi mendesak',
                 ]),
                 'technologies' => 'Usability Testing, UX Research',
-                'link' => null,
+                'link' => 'https://www.figma.com/design/MtdZmBWqzKqmVws6IFxGg5/PI?node-id=0-1&t=Td59i4VYO7mRk0qE-1',
                 'sort_order' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),

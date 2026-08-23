@@ -113,13 +113,21 @@
         <div class="glass-card about-card">
             @if($profile->about_photo && file_exists(public_path($profile->about_photo)))
             <div class="about-photo-col">
-                <div class="sticky-note">
-                    <svg class="sticky-note-pin" width="22" height="38" viewBox="0 0 22 38" fill="none" stroke="#94a3b8" stroke-width="2.5">
-                        <path d="M6 8v18a5 5 0 0 0 10 0V6a3.2 3.2 0 0 0-6.4 0v17a1.4 1.4 0 0 0 2.8 0V9"/>
-                    </svg>
-                    <div class="sticky-note-photo">
+                <div class="polaroid-note">
+                    <div class="polaroid-clip">
+                        <svg width="20" height="34" viewBox="0 0 20 34" fill="none" stroke="#94a3b8" stroke-width="2.5">
+                            <path d="M5 7v16a4.5 4.5 0 0 0 9 0V5a2.9 2.9 0 0 0-5.8 0v15.5a1.3 1.3 0 0 0 2.6 0V8"/>
+                        </svg>
+                        <span class="polaroid-charm"></span>
+                    </div>
+                    <div class="polaroid-photo">
                         <img src="{{ asset($profile->about_photo) }}" alt="{{ $profile->full_name }}" class="about-photo">
                     </div>
+                    <span class="polaroid-sticker">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff">
+                            <path d="M12 1.5l2.6 6.9 7.4.4-5.8 4.7 2 7.1L12 16.6 5.8 20.6l2-7.1-5.8-4.7 7.4-.4z"/>
+                        </svg>
+                    </span>
                 </div>
             </div>
             @endif
@@ -358,7 +366,7 @@
                     </ul>
                     @if($project->technologies)
                     <div class="project-tech">
-                        @foreach(explode(', ', $project->technologies) as $tech)
+                        @foreach(array_slice(explode(', ', $project->technologies), 0, $index === 0 ? 4 : 3) as $tech)
                         <span>{{ trim($tech) }}</span>
                         @endforeach
                     </div>
