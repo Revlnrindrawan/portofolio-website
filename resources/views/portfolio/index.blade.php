@@ -113,25 +113,12 @@
         <div class="glass-card about-card">
             @if($profile->about_photo && file_exists(public_path($profile->about_photo)))
             <div class="about-photo-col">
-                <div class="lanyard-stage" id="lanyardStage">
-                    <div class="lanyard-mount"></div>
-                    <div class="lanyard-rope" id="lanyardRope">
-                        <span class="lanyard-emblem">RAI</span>
-                    </div>
-                    <div class="lanyard-card-wrap" id="lanyardCardWrap">
-                        <div class="lanyard-hook"></div>
-                        <div class="lanyard-card-frame">
-                            <div class="lanyard-card">
-                                <img src="{{ asset($profile->about_photo) }}" alt="{{ $profile->full_name }}" class="about-photo" draggable="false">
-                                <div class="lanyard-card-info">
-                                    <span class="lanyard-card-name">{{ $profile->full_name }}</span>
-                                    <span class="lanyard-card-role">
-                                        <span data-i18n-en>Data Scientist (BNSP) · Information Systems</span>
-                                        <span data-i18n-id>Data Scientist (BNSP) · Sistem Informasi</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="sticky-note">
+                    <svg class="sticky-note-pin" width="22" height="38" viewBox="0 0 22 38" fill="none" stroke="#94a3b8" stroke-width="2.5">
+                        <path d="M6 8v18a5 5 0 0 0 10 0V6a3.2 3.2 0 0 0-6.4 0v17a1.4 1.4 0 0 0 2.8 0V9"/>
+                    </svg>
+                    <div class="sticky-note-photo">
+                        <img src="{{ asset($profile->about_photo) }}" alt="{{ $profile->full_name }}" class="about-photo">
                     </div>
                 </div>
             </div>
@@ -295,37 +282,31 @@
                     <span data-i18n-id>Keahlian Teknis</span>
                 </h3>
                 @php
-                    $groupedHardSkills = $hardSkills->groupBy('group_name');
+                    $hardSkillIcons = [
+                        'canva' => '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="8.3" r="1.2" fill="currentColor" stroke="none"/><circle cx="8.4" cy="13.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="15.6" cy="13.5" r="1.2" fill="currentColor" stroke="none"/>',
+                        'laravel' => '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+                        'html' => '<polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>',
+                        'css' => '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>',
+                        'figma' => '<circle cx="9" cy="9" r="4.5"/><circle cx="15" cy="15" r="4.5"/>',
+                        'data-analysis' => '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+                        'data-visualization' => '<path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>',
+                        'predictive-modeling' => '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
+                        'machine-learning' => '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>',
+                        'deep-learning' => '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>',
+                        'big-data' => '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>',
+                    ];
                 @endphp
-                <div class="hard-skills-groups">
-                    @foreach($groupedHardSkills as $group => $skills)
-                    <div class="skill-group">
-                        <h4 class="skill-group-title">{{ $group }}</h4>
-                        <div class="skill-tags">
-                            @foreach($skills as $skill)
-                            <span class="skill-tag hard">{{ $skill->name }}</span>
-                            @endforeach
-                        </div>
+                <div class="hard-skills-grid">
+                    @foreach($hardSkills as $skill)
+                    @php $iconKey = \Illuminate\Support\Str::slug($skill->name); @endphp
+                    <div class="hard-skill-tile">
+                        <span class="hard-skill-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                {!! $hardSkillIcons[$iconKey] ?? '<circle cx="12" cy="12" r="9"/>' !!}
+                            </svg>
+                        </span>
+                        <span class="hard-skill-name">{{ $skill->name }}</span>
                     </div>
-                    @endforeach
-                </div>
-            </div>
-            <div class="glass-card skills-card">
-                <h3 class="card-title">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="2" y1="12" x2="22" y2="12"/>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    </svg>
-                    <span data-i18n-en>Languages</span>
-                    <span data-i18n-id>Bahasa</span>
-                </h3>
-                <div class="skill-tags">
-                    @foreach($languages as $language)
-                    <span class="skill-tag language">
-                        <span data-i18n-en>{{ $language->name }}</span>
-                        <span data-i18n-id>{{ $language->name_id ?? $language->name }}</span>
-                    </span>
                     @endforeach
                 </div>
             </div>
@@ -342,8 +323,20 @@
         <div class="projects-grid">
             @php $paletteCycle = ['teal-blue', 'blue-purple', 'purple-light', 'light-teal']; @endphp
             @foreach($projects as $index => $project)
-            <div class="project-tile {{ $index === 0 ? 'project-tile-featured' : '' }} tile-{{ $paletteCycle[$index % 4] }}" data-aos="fade-up">
+            @php
+                $hasImage = $project->image && file_exists(public_path($project->image));
+                $hasLink = (bool) $project->link;
+                $tag = $hasLink ? 'a' : 'div';
+            @endphp
+            <{{ $tag }}
+                class="project-tile {{ $index === 0 ? 'project-tile-featured' : '' }} {{ $hasImage ? 'has-image' : 'tile-' . $paletteCycle[$index % 4] }}"
+                @if($hasImage) style="background-image: url('{{ asset($project->image) }}');" @endif
+                @if($hasLink) href="{{ $project->link }}" target="_blank" rel="noopener noreferrer" @endif
+                data-aos="fade-up"
+            >
+                @unless($hasImage)
                 <span class="project-tile-number">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                @endunless
                 <div class="project-tile-overlay">
                     <h3 class="project-title">
                         <span data-i18n-en>{{ $project->title }}</span>
@@ -370,8 +363,17 @@
                         @endforeach
                     </div>
                     @endif
+                    @if($hasLink)
+                    <span class="project-tile-visit">
+                        <span data-i18n-en>Visit project</span>
+                        <span data-i18n-id>Lihat proyek</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M7 17L17 7M7 7h10v10"/>
+                        </svg>
+                    </span>
+                    @endif
                 </div>
-            </div>
+            </{{ $tag }}>
             @endforeach
         </div>
     </div>
